@@ -29,7 +29,6 @@ export default {
       .then(res => res.json())
       .then((data) => {
         this.dataOfPerson = data['search-results'].entry;
-        console.log(this.dataOfPerson);
       });
   },
 };

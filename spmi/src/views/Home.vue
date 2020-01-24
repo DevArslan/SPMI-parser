@@ -23,11 +23,12 @@ export default {
     };
   },
   mounted() {
-    const proxy = 'https://cors-anywhere.herokuapp.com/';
-    const url = `${proxy}https://api.elsevier.com/content/search/scopus?query=au-id(23099248900)&apiKey=287f28aed3a978f68bfa3ef6991edc94`;
+    // const proxy = 'https://cors-anywhere.herokuapp.com/';
+    const url = 'http://127.0.0.1:8000/api/personalData';
     fetch(url)
       .then(res => res.json())
       .then((data) => {
+        console.log(data);
         this.dataOfPerson = data['search-results'].entry;
       });
   },

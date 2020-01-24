@@ -1,0 +1,16 @@
+[
+    {
+        "model":"getData.AuthorID",
+        "pk":1,
+        "fields": {
+            "scopusID":"57205158690"
+        }
+    },
+    {
+        "model":"getData.AuthorID",
+        "pk":2,
+        "fields": {
+            "scopusID":"57123558690"
+        }
+    }
+]

@@ -29,7 +29,7 @@ export default {
       .then(res => res.json())
       .then((data) => {
         console.log(data);
-        this.dataOfPerson = data['search-results'].entry;
+        this.dataOfPerson = data;
       });
   },
 };

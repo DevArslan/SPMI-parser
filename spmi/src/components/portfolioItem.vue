@@ -1,12 +1,11 @@
 <template>
   <tr>
-    <td>{{item['dc:title']}}</td>
-    <td>{{item['dc:creator']}}</td>
-    <td>{{item['prism:publicationName']}}</td>
-    <td>{{item['prism:volume']}}</td>
-    <td>{{item['prism:issueIdentifier']}}</td>
-    <td>{{item['prism:pageRange']}}</td>
-    <td>https://doi.org/{{item['prism:doi']}}</td>
+    <td>{{item['surname']}}</td>
+    <td>{{item['name']}}</td>
+    <td>{{item['academicDegree']}}</td>
+    <td>{{item['position']}}</td>
+    <td>{{item['department']}}</td>
+    <td>{{item['link']}}</td>
   </tr>
 </template>
 <script>

@@ -4,13 +4,12 @@
       <!-- <caption>A summary of the UK's most famous punk bands</caption> -->
       <thead>
         <tr>
-          <th>title</th>
-          <th>creator</th>
-          <th>publicationName</th>
-          <th>volume</th>
-          <th>issueIdentifier</th>
-          <th>pageRange</th>
-          <th>doi</th>
+          <th>Фамилия</th>
+          <th>Имя, Отчество</th>
+          <th>Ученое звание</th>
+          <th>Должность</th>
+          <th>Кафедра</th>
+          <th>Ссылка</th>
         </tr>
       </thead>
       <tbody>
@@ -33,6 +32,11 @@ export default {
 <style lang='scss' scoped>
 
   .wrapper{
+
+    table{
+      table-layout: auto;
+      width: 100%;
+    }
     table, th, tr{
       border: 1px solid #ccc;
       border-collapse: collapse;

@@ -6,28 +6,23 @@
         <li class="nav-item">
           <router-link to="/">
             <i class="far fa-address-card fa-2x"></i>
-            <p>personalData</p>
+            <p>Данные о преподавателях</p>
           </router-link>
         </li>
         <li class="nav-item">
           <router-link to="/about">
-            <i></i>
-            <p>scopus</p>
+            <i class="fas fa-user-plus fa-2x"></i>
+            <p>Опубликованные статьи</p>
           </router-link>
         </li>
         <li class="nav-item">
           <router-link to="/addPerson">
             <i class="fas fa-user-plus fa-2x"></i>
-            <p>Add person</p>
+            <p>Добавить</p>
           </router-link>
         </li>
 
       </ul>
-      <!-- <transition-group name="list" tag="ul">
-        <li v-for="item in items" v-bind:key="item" class="nav-item">
-          <router-link to="/about">{{ item }}</router-link>
-        </li>
-      </transition-group> -->
     </div>
     <div class="content">
       <router-view />
@@ -75,7 +70,7 @@
         opacity: 0;
         transform: translateX(0px);
         transition-property: opacity, transform;
-        transition-duration: 0.1s,0.25s;
+        transition-duration: 0.2s,0.25s;
       }
     }
   }
@@ -90,7 +85,7 @@
         transform: translateX(30px);
         opacity: 1;
         transition-property: opacity, transform;
-        transition-duration: 0.25s,0.5s;
+        transition-duration: 0.5s,0.5s;
       }
     }
   }

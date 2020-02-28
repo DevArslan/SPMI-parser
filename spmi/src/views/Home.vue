@@ -1,11 +1,19 @@
 <template>
   <div class="home">
 
-    <Portfolio
+    <Portfolio class="portfolio"
       v-bind:dataOfPerson = "dataOfPerson"
     />
   </div>
 </template>
+
+<style lang = "scss" scoped>
+  .portfolio{
+    -webkit-box-shadow: 0px -1px 11px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px -1px 11px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px -1px 11px 0px rgba(0,0,0,0.75);
+  }
+</style>
 
 <script>
 // @ is an alias to /src

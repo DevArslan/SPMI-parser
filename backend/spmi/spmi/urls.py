@@ -22,5 +22,6 @@ urlpatterns = [
     path('api/', include('getData.urls')),
     path('api/', include('personalData.urls')),
     path('api/', include('articleData.urls')),
+    path('api/', include('scopusAPI.urls')),
 ]
 

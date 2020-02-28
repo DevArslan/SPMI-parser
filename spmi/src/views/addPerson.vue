@@ -1,11 +1,13 @@
 <template>
   <div class="addPerson">
-    <addPersonForm></addPersonForm>
+    <addPersonForm class="addPersonForm"></addPersonForm>
   </div>
 </template>
 
-<style lang="scss">
-
+<style lang="scss" scoped>
+  .addPersonForm{
+    margin:0 auto;
+  }
 </style>
 
 <script>

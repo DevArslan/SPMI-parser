@@ -1,6 +1,7 @@
 <template>
 <!-- eslint-disable max-len -->
   <div class="wrapper">
+    <button @click="dateSort">Сортировка по дате</button>
     <table>
       <!-- <caption>A summary of the UK's most famous punk bands</caption> -->
       <thead>
@@ -16,9 +17,10 @@
           <th>doi</th>
         </tr>
       </thead>
-      <tbody>
-        <articleItem v-for="item of dateSort(articleData)" v-bind:item="item" v-bind:key="item.id " />
-      </tbody>
+      <!-- <transition-group name="flip-list" tag="tbody">
+          <articleItem v-for="item of articleData" v-bind:item="item" v-bind:key="item" />
+      </transition-group> -->
+      <articleItem v-for="item of articleData" v-bind:item="item" v-bind:key="item" />
     </table>
   </div>
 </template>
@@ -31,14 +33,31 @@ export default {
   components: {
     articleItem,
   },
-  computed: {
-    dateSort: function (dateArray) {
-      for (let itemArray of dateArray) {
-      itemArray['date'] = 'Complete'
-     }
-     return dateArray
-    }
-  }
+  data() {
+    return {
+      message: '123456qwertyasdfgh',
+    };
+  },
+  methods: {
+    dateSortFunction(a, b) {
+      const c = Date.parse(a.date);
+      const d = Date.parse(b.date);
+      if (c < d) {
+        return -1;
+      }
+      if (c > d) {
+        return 1;
+      }
+      return 0;
+    },
+    dateSort() {
+      // `this` указывает на экземпляр vm
+      // for(item in this.articleData){
+      // }
+      console.log(this.articleData.sort(this.dateSortFunction));
+      return this.articleData.sort(this.dateSortFunction);
+    },
+  },
 };
 </script>
 <style lang='scss' scoped>
@@ -58,5 +77,7 @@ export default {
       text-transform: uppercase;
     }
   }
-
+  // .flip-list-move {
+  //   transition: transform 1s;
+  // }
 </style>

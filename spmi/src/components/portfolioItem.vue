@@ -23,7 +23,7 @@ export default {
   td{
     text-align: justify ;
     padding:10px;
-    border: 1px solid #ccc;
+    border-right: 0.5px solid #cccccc;
     }
   a{
     text-align: justify ;

@@ -1,7 +1,18 @@
 <template>
 <!-- eslint-disable max-len -->
   <div class="wrapper">
-    <button @click="dateSort">Сортировка по дате</button>
+    <div class="selectSort" @click="selectSort">
+      <button class="selectSort-button" >Сортировать по</button>
+        <svg class="selectSort-icon" :class="{ active: isActive }" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/><path d="M0 0h24v24H0V0z" fill="none"/></svg>
+    </div>
+    <div class="selectList" v-if="isActive">
+      <ul>
+        <li class="selectList-item" @click="dateSort">По дате</li>
+        <li class="selectList-item" @click="articleNameSort">По названию статьи</li>
+        <li class="selectList-item" @click="authorNameSort">По автору</li>
+        <li class="selectList-item" @click="creatorNameSort">По главному автору</li>
+      </ul>
+    </div>
     <table>
       <!-- <caption>A summary of the UK's most famous punk bands</caption> -->
       <thead>
@@ -19,8 +30,9 @@
       </thead>
       <!-- <transition-group name="flip-list" tag="tbody">
           <articleItem v-for="item of articleData" v-bind:item="item" v-bind:key="item" />
+                                                            ЗДЕСЬ БЫЛО ЧТО-ТО ВАЖНОЕ, НО Я ЕГО УДАЛИЛ (v-bind:key="item")
       </transition-group> -->
-      <articleItem v-for="item of articleData" v-bind:item="item" v-bind:key="item" />
+      <articleItem v-for="item of articleData" v-bind:item="item"/>
     </table>
   </div>
 </template>
@@ -36,9 +48,13 @@ export default {
   data() {
     return {
       message: '123456qwertyasdfgh',
+      isActive: false,
     };
   },
   methods: {
+    selectSort(){
+      this.isActive = !this.isActive;
+    },
     dateSortFunction(a, b) {
       const c = Date.parse(a.date);
       const d = Date.parse(b.date);
@@ -51,19 +67,83 @@ export default {
       return 0;
     },
     dateSort() {
-      // `this` указывает на экземпляр vm
-      // for(item in this.articleData){
-      // }
       console.log(this.articleData.sort(this.dateSortFunction));
       return this.articleData.sort(this.dateSortFunction);
     },
+    articleNameSortFunction(a, b){
+      const c = a.title
+      const d = b.title
+      if (c < d) {
+        return -1;
+      }
+      if (c > d) {
+        return 1;
+      }
+      return 0;
+    },
+    articleNameSort(){
+      return this.articleData.sort(this.articleNameSortFunction);
+    },
+    authorNameSortFunction(a, b){
+      const c = a.author
+      const d = b.author
+      if (c < d) {
+        return -1;
+      }
+      if (c > d) {
+        return 1;
+      }
+      return 0;
+    },
+    authorNameSort(){
+      return this.articleData.sort(this.authorNameSortFunction);
+    },
+    creatorNameSortFunction(a, b){
+      const c = a.creator
+      const d = b.creator
+      if (c < d) {
+        return -1;
+      }
+      if (c > d) {
+        return 1;
+      }
+      return 0;
+    },
+    creatorNameSort(){
+      return this.articleData.sort(this.creatorNameSortFunction);
+    }
+
   },
 };
 </script>
 <style lang='scss' scoped>
 
   .wrapper{
+    -webkit-box-shadow: 0px -1px 11px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px -1px 11px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px -1px 11px 0px rgba(0,0,0,0.75);
+    .selectSort{
+      margin: 10px;
+      width: 150px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .selectSort-button{
 
+    }
+      .selectSort-icon{
+          fill: white;
+          transform: rotate(0deg);
+          transition: all 0.3s;
+      }
+      .selectSort-icon.active{
+          transform: rotate(-180deg);
+          transition: all 0.3s;
+      }
+    }
     table{
       table-layout: auto;
       width: 100%;
@@ -75,6 +155,24 @@ export default {
     th{
       padding:10px;
       text-transform: uppercase;
+    }
+    .selectList{
+      position: absolute;
+      background-color: #2C3E50;
+      z-index: 9999;
+      margin: 10px;
+      width: 150px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      ul{
+        padding:0px;
+        list-style: none;
+        .selectList-item{
+          cursor: pointer;
+          margin:0px 0px 8px 0px;
+        }
+      }
     }
   }
   // .flip-list-move {

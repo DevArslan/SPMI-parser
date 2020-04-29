@@ -27,10 +27,27 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "addPerson" */ '../views/addPerson.vue'),
   },
+  {
+    path: '/login/',
+    name: 'login',
+    // route level code-splitting
+    // this generates a separate chunk (addPerson.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "login" */ '../views/login.vue'),
+  },
 ];
 
 const router = new VueRouter({
   routes,
 });
+
+
+
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'login' && !localStorage.getItem('auth_token')) next({ name: 'login' })
+  else{
+    next()
+  }
+})
 
 export default router;

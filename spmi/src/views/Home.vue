@@ -29,7 +29,12 @@ export default {
   mounted() {
     // const proxy = 'https://cors-anywhere.herokuapp.com/';
     const url = 'http://127.0.0.1:8000/api/personalData';
-    fetch(url)
+    const token = localStorage.getItem('auth_token');
+    fetch(url,{
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
       .then(res => res.json())
       .then((data) => {
         // console.log(data);

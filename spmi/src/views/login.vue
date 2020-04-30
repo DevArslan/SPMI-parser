@@ -1,12 +1,13 @@
 <template>
   <div class="login">
-    <loginForm class="loginForm">awdawdwa</loginForm>
+    <loginForm ></loginForm>
   </div>
 </template>
 
 <style lang="scss" scoped>
-  .loginForm{
-    margin:0 auto;
+  .login{
+    display: flex;
+    justify-content: center;
   }
 </style>
 

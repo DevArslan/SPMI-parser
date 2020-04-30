@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'articleData',
     'scopusAPI',
     'rest_framework.authtoken',
+    # 'rest_registration',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (

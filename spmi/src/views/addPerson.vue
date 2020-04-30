@@ -1,6 +1,6 @@
 <template>
-  <div class="addPerson">
-    <addPersonForm class="addPersonForm"></addPersonForm>
+  <div >
+    <addPersonForm></addPersonForm>
   </div>
 </template>
 

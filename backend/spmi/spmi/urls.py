@@ -25,5 +25,7 @@ urlpatterns = [
     path('api/', include('articleData.urls')),
     path('api/', include('scopusAPI.urls')),
     path('api-token-auth/', views.obtain_auth_token, name="api-token-auth"),
+    # path('accounts/', include('rest_registration.api.views.register')),
+
 ]
 

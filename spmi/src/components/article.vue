@@ -18,7 +18,8 @@
         <li class="selectList-item" @click="creatorNameSort">По главному автору</li>
       </ul>
     </div>
-    <table>
+    <button class="excelButton" @click="exportTableToExcel">Экспорт в Excel</button>
+    <table border="1" id="titleTable">
       <!-- <caption>A summary of the UK's most famous punk bands</caption> -->
       <thead>
         <tr>
@@ -84,6 +85,26 @@ export default {
     }
   },
   methods: {
+    exportTableToExcel(){
+      let downloadLink = '';
+      const dataType = 'application/vnd.ms-excel';
+      const tableSelect = document.getElementById('titleTable');
+      console.log(tableSelect)
+      const tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+      const filename = 'excelArticles'+'.xls';
+
+      downloadLink = document.createElement("a");
+
+      document.body.appendChild(downloadLink);
+
+      downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+      downloadLink.download = filename;
+
+      downloadLink.click();
+
+    },
     selectSort(){
       this.isActive = !this.isActive;
     },
@@ -154,6 +175,15 @@ export default {
     -webkit-box-shadow: 0px -1px 11px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px -1px 11px 0px rgba(0,0,0,0.75);
     box-shadow: 0px -1px 11px 0px rgba(0,0,0,0.75);
+    .excelButton{
+        margin-top: 10px;
+        padding: 5px;
+        border-radius: 3px;
+        background-color: #67DFD4;
+        color: #ffffff;
+        text-transform: uppercase;
+        border:none;
+    }
     .search input{
       margin:20px;
       width:20%;
@@ -168,9 +198,6 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      .selectSort-button{
-
-    }
       .selectSort-icon{
           fill: white;
           transform: rotate(0deg);

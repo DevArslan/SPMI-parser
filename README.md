@@ -8,3 +8,4 @@
 
 ##### install nodeJS 12.14.0 
 ##### clone repository 
+##### npm install jspdf jspdf-autotable

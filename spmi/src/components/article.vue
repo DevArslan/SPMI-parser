@@ -18,7 +18,13 @@
         <li class="selectList-item" @click="creatorNameSort">По главному автору</li>
       </ul>
     </div>
-    <button class="excelButton" @click="exportTableToExcel">Экспорт в Excel</button>
+    <div class="exportButtons">
+      <button class="exportButtons-excel" @click="exportToExcel">Экспорт в Excel</button>
+      <button class="exportButtons-word" @click="exportToDoc">Экспорт в Word</button>
+      <button class="exportButtons-pdf" @click="exportToPDF">Экспорт в PDF</button>
+    </div>
+
+
     <table border="1" id="titleTable">
       <!-- <caption>A summary of the UK's most famous punk bands</caption> -->
       <thead>
@@ -44,6 +50,8 @@
 </template>
 <script>
 import articleItem from '@/components/articleItem.vue';
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
 
 export default {
   props: ['articleData'],
@@ -85,11 +93,29 @@ export default {
     }
   },
   methods: {
-    exportTableToExcel(){
+    exportToPDF(){
+      const pdf = new jsPDF()
+      autoTable(pdf, {
+        html: '#titleTable',
+        margin: { left:0 },
+        columnStyles: {
+          0: {cellWidth: 20},
+          1: {cellWidth: 20},
+          2: {cellWidth: 60},
+          3: {cellWidth: 60},
+          4: {cellWidth: 20},
+          5: {cellWidth: 20},
+          6: {cellWidth: 20},
+          7: {cellWidth: 20},
+          8: {cellWidth: 20},
+        }
+      })
+      pdf.save('table.pdf')
+    },
+    exportToExcel(){
       let downloadLink = '';
       const dataType = 'application/vnd.ms-excel';
       const tableSelect = document.getElementById('titleTable');
-      console.log(tableSelect)
       const tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
 
       const filename = 'excelArticles'+'.xls';
@@ -104,7 +130,29 @@ export default {
 
       downloadLink.click();
 
+      document.body.removeChild(downloadLink);
+
     },
+    exportToDoc(){
+      let downloadLink = '';
+      const dataType = 'application/msword';
+      const tableSelect = document.getElementById('titleTable');
+      const tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+      const filename = 'excelArticles'+'..doc';
+
+      downloadLink = document.createElement("a");
+
+      document.body.appendChild(downloadLink);
+
+      downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+      downloadLink.download = filename;
+
+      downloadLink.click();
+
+      document.body.removeChild(downloadLink);
+  },
     selectSort(){
       this.isActive = !this.isActive;
     },
@@ -175,7 +223,7 @@ export default {
     -webkit-box-shadow: 0px -1px 11px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px -1px 11px 0px rgba(0,0,0,0.75);
     box-shadow: 0px -1px 11px 0px rgba(0,0,0,0.75);
-    .excelButton{
+    .exportButtons button{
         margin-top: 10px;
         padding: 5px;
         border-radius: 3px;

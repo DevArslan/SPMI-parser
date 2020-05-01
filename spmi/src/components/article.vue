@@ -5,6 +5,11 @@
       <button class="selectSort-button" >Сортировать по</button>
         <svg class="selectSort-icon" :class="{ active: isActive }" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/><path d="M0 0h24v24H0V0z" fill="none"/></svg>
     </div>
+    <div class="search">
+      <input class="search-author" type="text" v-model="author" placeholder="Введите фамилию сотрудника">
+      <input class="search-articleTitle" type="text" v-model="title" placeholder="Введите название статьи">
+      <input class="search-journal" type="text" v-model="journal" placeholder="Введите название журнала">
+    </div>
     <div class="selectList" v-if="isActive">
       <ul>
         <li class="selectList-item" @click="dateSort">По дате</li>
@@ -32,7 +37,7 @@
           <articleItem v-for="item of articleData" v-bind:item="item" v-bind:key="item" />
                                                             ЗДЕСЬ БЫЛО ЧТО-ТО ВАЖНОЕ, НО Я ЕГО УДАЛИЛ (v-bind:key="item")
       </transition-group> -->
-      <articleItem v-for="item of articleData" v-bind:item="item"/>
+      <articleItem v-for="item of filteredList" v-bind:item="item" v-bind:key="item.id "/>
     </table>
   </div>
 </template>
@@ -49,7 +54,34 @@ export default {
     return {
       message: '123456qwertyasdfgh',
       isActive: false,
+      author: '',
+      journal: '',
+      title: '',
     };
+  },
+  computed: {
+    filteredList() {
+      const tempAuthor = this.author.charAt(0).toUpperCase() + this.author.slice(1);
+      const tempJournal = this.journal.charAt(0).toUpperCase() + this.journal.slice(1);
+      const tempTitle = this.title.charAt(0).toUpperCase() + this.title.slice(1);
+      try {
+        const filteredData = this.articleData.filter(function(articleDataItem){
+        if(tempAuthor==='' && tempJournal==='' && tempTitle==='') return true;
+        else{
+          try {
+            return articleDataItem.creator.indexOf(tempAuthor) > -1 && articleDataItem.journal.indexOf(tempJournal) > -1 && articleDataItem.title.indexOf(tempTitle) > -1;
+          } catch (error) {
+            console.log('Пустое поле')
+          }
+        }
+       })
+       console.log(filteredData)
+       return(filteredData)
+      } catch (err) {
+        console.log(err)
+        console.log("Данные не получены")
+      }
+    }
   },
   methods: {
     selectSort(){
@@ -122,6 +154,11 @@ export default {
     -webkit-box-shadow: 0px -1px 11px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px -1px 11px 0px rgba(0,0,0,0.75);
     box-shadow: 0px -1px 11px 0px rgba(0,0,0,0.75);
+    .search input{
+      margin:20px;
+      width:20%;
+      padding:5px;
+    }
     .selectSort{
       margin: 10px;
       width: 150px;

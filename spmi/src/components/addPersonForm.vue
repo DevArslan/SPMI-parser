@@ -94,7 +94,7 @@ export default {
   },
   methods: {
     setValue() {
-      const url = 'http://127.0.0.1:8000/api/personalData/';
+      const url = 'https://spmiapi.pythonanywhere.com/api/personalData/';
       const data = {
         surname: this.surname,
         name: this.name,

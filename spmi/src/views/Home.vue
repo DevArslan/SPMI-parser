@@ -28,7 +28,7 @@ export default {
   },
   mounted() {
     // const proxy = 'https://cors-anywhere.herokuapp.com/';
-    const url = 'http://spmiapi.pythonanywhere.com/api/personalData';
+    const url = 'https://spmiapi.pythonanywhere.com/api/personalData';
     const token = localStorage.getItem('auth_token');
     fetch(url,{
       headers: {

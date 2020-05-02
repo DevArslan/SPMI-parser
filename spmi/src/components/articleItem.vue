@@ -26,7 +26,6 @@ export default {
   td{
     text-align: justify ;
     padding:10px;
-    border: 1px solid #ccc;
     }
   a{
     text-align: justify ;

@@ -5,11 +5,6 @@
       <button class="selectSort-button" >Сортировать по</button>
         <svg class="selectSort-icon" :class="{ active: isActive }" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/><path d="M0 0h24v24H0V0z" fill="none"/></svg>
     </div>
-    <div class="search">
-      <input class="search-author" type="text" v-model="author" placeholder="Введите фамилию сотрудника">
-      <input class="search-articleTitle" type="text" v-model="title" placeholder="Введите название статьи">
-      <input class="search-journal" type="text" v-model="journal" placeholder="Введите название журнала">
-    </div>
     <div class="selectList" v-if="isActive">
       <ul>
         <li class="selectList-item" @click="dateSort">По дате</li>
@@ -18,14 +13,34 @@
         <li class="selectList-item" @click="creatorNameSort">По главному автору</li>
       </ul>
     </div>
+
     <div class="exportButtons">
       <button class="exportButtons-excel" @click="exportToExcel">Экспорт в Excel</button>
       <button class="exportButtons-word" @click="exportToDoc">Экспорт в Word</button>
       <button class="exportButtons-pdf" @click="exportToPDF">Экспорт в PDF</button>
     </div>
 
+    <div class="search">
+      <ul>
+        <li>
+          <label for="author">Автор</label>
+          <input name="author" class="search-author" type="text" v-model="author" >
+        </li>
+        <li>
+          <label for="articleTitle">Название статьи</label>
+          <input name="articleTitle" class="search-articleTitle" type="text" v-model="title" >
+        </li>
+        <li>
+          <label for="journalTitle">Название журнала</label>
+          <input name="journalTitle" class="search-journal" type="text" v-model="journal" >
+        </li>
+      </ul>
+    </div>
 
-    <table border="1" id="titleTable">
+
+
+
+    <table class="articlesTable" border="1" id="titleTable">
       <!-- <caption>A summary of the UK's most famous punk bands</caption> -->
       <thead>
         <tr>
@@ -223,22 +238,63 @@ export default {
     -webkit-box-shadow: 0px -1px 11px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px -1px 11px 0px rgba(0,0,0,0.75);
     box-shadow: 0px -1px 11px 0px rgba(0,0,0,0.75);
-    .exportButtons button{
+    padding-top:20px;
+    .exportButtons{
+      margin-left:20px;
+      display: flex;
+      justify-content: space-between;
+      width:30%;
+       button{
         margin-top: 10px;
         padding: 5px;
         border-radius: 3px;
-        background-color: #67DFD4;
         color: #ffffff;
         text-transform: uppercase;
         border:none;
+      }
+      .exportButtons-word{
+        background-color: #2A5594;
+      }
+      .exportButtons-excel{
+        background-color: #016F38;
+      }
+      .exportButtons-pdf{
+        background-color: #EB0C0C;
+      }
     }
-    .search input{
+
+    .search{
       margin:20px;
-      width:20%;
-      padding:5px;
+      ul {
+      margin: 0;
+      padding:0;
+      width:50%;
+      display: flex;
+      justify-content: space-between;
+      li {
+        width: 60%;
+        list-style: none;
+        margin-bottom: 10px;
+        label {
+          display: block;
+          text-transform: uppercase;
+          color: #cccccc;
+          font-size: 0.8rem;
+        }
+        input{
+          padding:5px;
+          background-color: #2c3e50;
+          border:none;
+          color:whitesmoke;
+          caret-color: whitesmoke;
+          margin-bottom: 10px;
+          border-bottom:1px solid #ccc;
+        }
+      }
+    }
     }
     .selectSort{
-      margin: 10px;
+      margin-left: 20px;
       width: 150px;
       padding: 5px;
       border: 1px solid #ccc;
@@ -256,7 +312,8 @@ export default {
           transition: all 0.3s;
       }
     }
-    table{
+    .articlesTable{
+      margin-top:20px;
       table-layout: auto;
       width: 100%;
     }
@@ -272,7 +329,7 @@ export default {
       position: absolute;
       background-color: #2C3E50;
       z-index: 9999;
-      margin: 10px;
+      margin: 20px;
       width: 150px;
       padding: 5px;
       border: 1px solid #ccc;

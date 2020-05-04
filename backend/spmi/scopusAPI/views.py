@@ -4,9 +4,13 @@ from .models import scopusData
 from .serializers import scopusDataSerializer
 from rest_framework import permissions
 from rest_framework.authtoken.models import Token
+from articleData.models import articleData
+
 
 class scopusDataViewSet(viewsets.ModelViewSet):
 
     permission_classes = [permissions.IsAuthenticated,]
     queryset = scopusData.objects.all().order_by('author','creator','title','journal','date','volume','issue','pages','doi')
     serializer_class = scopusDataSerializer
+
+    # print(list(articleData.objects.all().order_by('scopusID')))

@@ -136,7 +136,9 @@
     },
     methods: {
       async tokenAuth() {
-        const url = 'https://spmiapi.pythonanywhere.com/api-token-auth/'
+        // const url = 'https://spmiapi.pythonanywhere.com/api-token-auth/'
+        const url = 'http://127.0.0.1:8000/api-token-auth/'
+
         const data = {
             username: this.login,
             password: this.password,

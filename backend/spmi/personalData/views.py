@@ -47,7 +47,6 @@ class excelDownloadViewSet(APIView):
                 employers[str(rownum)] = employer
                 for item in list(employers.items()):
                   employersData.append(item[1])
-            # return json.loads(employers, ensure_ascii=False)
             return employersData
 
         def sheet_to_personaldata_objects():
@@ -65,7 +64,7 @@ class excelDownloadViewSet(APIView):
             personalDataItem.position = item['position']
             personalDataItem.department = item['department']
             personalDataItem.save()
-            
+
         sheet_to_personaldata_objects()
 
         return Response(status=204)

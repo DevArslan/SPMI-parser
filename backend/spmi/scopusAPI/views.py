@@ -15,8 +15,7 @@ class scopusDataViewSet(viewsets.ModelViewSet):
     queryset = scopusData.objects.all().order_by('author','creator','title','journal','date','volume','issue','pages','doi')
     serializer_class = scopusDataSerializer
 
-
-    def SCUPUS():
+    def SCOPUS():
 
         scopusIDs = list(articleData.objects.all().order_by('scopusID'))
         COLUMNS = ['author','creator','title','journal','date','volume','issue','pages','doi']
@@ -33,7 +32,7 @@ class scopusDataViewSet(viewsets.ModelViewSet):
         #     return df
         def get_df_with_publics(author, json):
             for entry in json['search-results']['entry']:
-                print(get_series_from_entry(author, entry))
+                get_series_from_entry(author, entry)
 
 
         def get_series_from_entry(author, entry):
@@ -58,19 +57,4 @@ class scopusDataViewSet(viewsets.ModelViewSet):
             df_author = get_df_with_publics(scopusIDs[i].scopusID, json)
             df = pd.concat([df, df_author])
 
-    SCUPUS()
-
-# def main():
-#   d = getScopusID()
-#   df = pd.DataFrame(columns = COLUMNS)
-#   for author in d:
-#       response = requests.get(search_request(author))
-#       json = response.json()
-#       df_author = get_df_with_publics(author, json)
-#       df = pd.concat([df, df_author])
-      
-#       engine = create_engine('postgresql://postgres:Direling2017@localhost:5432/postgres')
-#       df.to_sql('scopusAPI_scopusdata', engine, if_exists='replace')
-
-# if __name__ == '__main__':
-#     main()
+    # SCOPUS()
